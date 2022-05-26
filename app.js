@@ -1,4 +1,5 @@
 const express = require("express")
+const { use } = require("express/lib/router")
 const Users = require("./models/users")
 const app = express()
 
@@ -20,6 +21,10 @@ app.post("/api/add_user", (req, res) => {
     if (users.getAllKeys.includes(req)) {
         res.send("Already exists.")
     } else {
-        res.send(users.add)
+        users.add.then((data) => {
+            res.send(data)
+        })
     }
 })
+
+app.listen(3000, () => console.log("Listening on port 3000..."))
