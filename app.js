@@ -5,23 +5,23 @@ const app = express()
 
 const users = new Users
 
-app.get("/api/get_user", (req, res) => {
+app.get("/api/get_user", async (req, res) => {
     if (!req) {
         res.statusCode(400)
     }
 })
 
-app.get("/api/get_all_users", (req, res) => {
+app.get("/api/get_all_users", async (req, res) => {
     if (!req) {
         res.statusCode(400)
     }
 })
 
-app.post("/api/add_user", (req, res) => {
-    if (users.getAllKeys.includes(req)) {
+app.post("/api/add_user", async (req, res) => {
+    if ((await users.getAllKeys()).includes(req)) {
         res.send("Already exists.")
     } else {
-        users.add.then((data) => {
+        await users.add(req).then((data) => {
             res.send(data)
         })
     }
