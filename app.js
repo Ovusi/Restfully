@@ -7,7 +7,13 @@ const users_ = new Users
 
 app.get("/api/get_user", async (req, res) => {
     if (!req) {
+        //...
         res.statusCode(400)
+    } else {
+        //...
+        await users_.retreive(req).then((data) => {
+            res.send(data)
+        })
     }
 })
 
@@ -25,7 +31,7 @@ app.get("/api/get_all_users", async (req, res) => {
 })
 
 app.post("/api/add_user", async (req, res) => {
-    if (await users_.getAllKeys().includes(req)) {
+    if (users_.getAllKeys().includes(req)) {
         //...
         await users_.add(req).then((data) => {
             res.send(data)

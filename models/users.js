@@ -19,9 +19,10 @@ function Users() {
 
     this.retreive = async (key) => {
         const keyString = JSON.stringify(key)
+
         await db.get(keyString)
             .then((data) => { return JSON.parse(data) })
-            .catch((err) => { return "NO" })
+            .catch((err) => { return err })
     }
 
     this.getAllKeys = async () => {
