@@ -7,10 +7,10 @@ const users_ = new Users
 
 app.get("/api/get_user", async (req, res) => {
     if (!req) {
-        //...
+        // if payload  is empty, return error code.
         res.statusCode(400)
     } else {
-        //...
+        // else we query the db and return the data.
         await users_.retreive(req).then((data) => {
             res.send(data)
         })
@@ -18,27 +18,23 @@ app.get("/api/get_user", async (req, res) => {
 })
 
 app.get("/api/get_all_users", async (req, res) => {
-    if (!req) {
-        //...
-        res.statusCode(400)
-    } else {
-        //...
-        await users_.getAllKeys()
+    // return an array of user keys from the db.
+    await users_.getAllKeys()
         .then((data) => {
             res.send(data)
         })
-    }
 })
 
 app.post("/api/add_user", async (req, res) => {
     if (users_.getAllKeys().includes(req)) {
-        //...
+        // check if key exists in the db.
+        // if it exists, return an error.
+        res.send("Already exists.")      
+    } else {
+        // add new user to the db.
         await users_.add(req).then((data) => {
             res.send(data)
         })
-    } else {
-        //...
-        res.send("Already exists.")
     }
 })
 
