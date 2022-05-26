@@ -8,18 +8,18 @@ const users_ = new Users
 
 
 /**
- * request body = {"name": ""}
+ * request params = {"name": ""}
  */
 app.get("/api/get_user/:", async (req, res, next) => {
-    const body = req.body
+    const param = req.params
 
     if (req.method === "GET") {
-        if (!body) {
+        if (!param) {
             // if payload  is empty, return error code.
             res.statusCode(400)
         } else {
             // else we query the db and return the data.
-            await users_.retreive(body.name).then((data) => {
+            await users_.retreive(param.name).then((data) => {
                 res.send(data)
             }).catch(next)
         }
@@ -40,9 +40,9 @@ app.get("/api/get_all_users", async (req, res, next) => {
  * request body = {"name": "", "details": {}"}
  */
 app.post("/api/add_user", async (req, res, next) => {
-    const body = req.body
-    const userName = body.name
-    const userDetails = body.details
+    const param = req.body
+    const userName = param.name
+    const userDetails = param.details
 
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
