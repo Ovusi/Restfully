@@ -33,8 +33,8 @@ app.get("/api/get_all_users", async (req, res) => {
 app.post("/api/add_user", async (req, res) => {
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
+        // check if key exists in the db.
         if (keys.includes(req.body)) {
-            // check if key exists in the db.
             // if it exists, return an error.
             res.send("Already exists.")
         } else {
