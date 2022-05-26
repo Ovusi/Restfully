@@ -12,6 +12,7 @@ const users_ = new Users
  */
 app.get("/api/get_user/:", async (req, res, next) => {
     const body = req.body
+    
     if (req.method === "GET") {
         if (!body) {
             // if payload  is empty, return error code.
@@ -42,6 +43,7 @@ app.post("/api/add_user", async (req, res) => {
     const body = req.body
     const userName = body.name
     const userDetails = body.details
+
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
         // check if key exists in the db.
