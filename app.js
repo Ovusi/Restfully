@@ -6,14 +6,19 @@ const app = express()
 app.use(express.json())
 const users_ = new Users
 
+
+/**
+ * request body = {"name": ""}
+ */
 app.get("/api/get_user/:", async (req, res, next) => {
+    const body = req.body
     if (req.method === "GET") {
-        if (!req.params.key) {
+        if (!body) {
             // if payload  is empty, return error code.
             res.statusCode(400)
         } else {
             // else we query the db and return the data.
-            await users_.retreive(req.params.key).then((data) => {
+            await users_.retreive(body.name).then((data) => {
                 res.send(data)
             }).catch(next)
         }
@@ -30,7 +35,13 @@ app.get("/api/get_all_users", async (req, res, next) => {
     }
 })
 
+/**
+ * request body = {"name": "", "details": {}"}
+ */
 app.post("/api/add_user", async (req, res) => {
+    const body = req.body
+    const userName = body.name
+    const userDetails = body.details
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
         // check if key exists in the db.
@@ -39,7 +50,7 @@ app.post("/api/add_user", async (req, res) => {
             res.send("Already exists.")
         } else {
             // add new user to the db.
-            await users_.add(req.body).then((data) => {
+            await users_.add(userName, userDetails).then((data) => {
                 res.send(data)
             }).catch(next)
         }
