@@ -12,7 +12,7 @@ const users_ = new Users
  */
 app.get("/api/get_user/:", async (req, res, next) => {
     const body = req.body
-    
+
     if (req.method === "GET") {
         if (!body) {
             // if payload  is empty, return error code.
@@ -39,7 +39,7 @@ app.get("/api/get_all_users", async (req, res, next) => {
 /**
  * request body = {"name": "", "details": {}"}
  */
-app.post("/api/add_user", async (req, res) => {
+app.post("/api/add_user", async (req, res, next) => {
     const body = req.body
     const userName = body.name
     const userDetails = body.details
