@@ -29,7 +29,7 @@ function Users() {
         for await (const [key, value] of db.iterator()) {
             keys.push(key)
         }
-        console.log(keys)
+        return keys
     }
 }
 
