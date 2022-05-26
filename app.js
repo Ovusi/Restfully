@@ -3,7 +3,7 @@ const { use } = require("express/lib/router")
 const Users = require("./models/users")
 const app = express()
 
-const users = new Users
+const users_ = new Users
 
 app.get("/api/get_user", async (req, res) => {
     if (!req) {
@@ -14,14 +14,16 @@ app.get("/api/get_user", async (req, res) => {
 app.get("/api/get_all_users", async (req, res) => {
     if (!req) {
         res.statusCode(400)
+    } else {
+        res.send(users_.getAllKeys())
     }
 })
 
 app.post("/api/add_user", async (req, res) => {
-    if ((await users.getAllKeys()).includes(req)) {
+    if (await users_.getAllKeys().includes(req)) {
         res.send("Already exists.")
     } else {
-        await users.add(req).then((data) => {
+        await users_.add(req).then((data) => {
             res.send(data)
         })
     }

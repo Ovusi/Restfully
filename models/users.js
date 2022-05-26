@@ -13,15 +13,15 @@ function Users() {
         const valueString = JSON.stringify(value)
 
         await db.put(keyString, valueString)
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err))
+            .then((data) => { return data })
+            .catch((err) => { return err })
     }
 
     this.retreive = async (key) => {
         const keyString = JSON.stringify(key)
         await db.get(keyString)
-            .then((data) => console.log(JSON.parse(data)))
-            .catch((err) => console.log("NO"))
+            .then((data) => { return JSON.parse(data) })
+            .catch((err) => { return "NO" })
     }
 
     this.getAllKeys = async () => {
