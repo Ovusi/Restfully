@@ -38,7 +38,7 @@ app.post("/api/add_user", async (req, res) => {
             res.send("Already exists.")      
         } else {
             // add new user to the db.
-            await users_.add(req).then((data) => {
+            await users_.add(req.body).then((data) => {
                 res.send(data)
             })
         }
