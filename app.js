@@ -13,17 +13,23 @@ app.get("/api/get_user", async (req, res) => {
 
 app.get("/api/get_all_users", async (req, res) => {
     if (!req) {
+        //...
         res.statusCode(400)
     } else {
+        //...
         await users_.getAllKeys()
-        .then((data) => { res.send(data) })
+        .then((data) => {
+            res.send(data)
+        })
     }
 })
 
 app.post("/api/add_user", async (req, res) => {
     if (await users_.getAllKeys().includes(req)) {
+        //...
         res.send("Already exists.")
     } else {
+        //...
         await users_.add(req).then((data) => {
             res.send(data)
         })
