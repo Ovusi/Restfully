@@ -27,12 +27,12 @@ app.get("/api/get_all_users", async (req, res) => {
 app.post("/api/add_user", async (req, res) => {
     if (await users_.getAllKeys().includes(req)) {
         //...
-        res.send("Already exists.")
-    } else {
-        //...
         await users_.add(req).then((data) => {
             res.send(data)
         })
+    } else {
+        //...
+        res.send("Already exists.")
     }
 })
 
