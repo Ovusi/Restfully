@@ -15,7 +15,8 @@ app.get("/api/get_all_users", async (req, res) => {
     if (!req) {
         res.statusCode(400)
     } else {
-        res.send(users_.getAllKeys())
+        await users_.getAllKeys()
+        .then((data) => { res.send(data) })
     }
 })
 
