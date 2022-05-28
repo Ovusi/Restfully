@@ -27,7 +27,8 @@ function Users() {
 
     this.getAllKeys = async () => {
         const keys = []
-        for await (const [key, value] of db.iterator()) {
+        const dbIterator = db.iterator()
+        for await (let [key, value] of dbIterator) {
             keys.push(key)
         }
         return keys
