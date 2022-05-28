@@ -41,7 +41,7 @@ app.get("/api/get_all_users", async (req, res, next) => {
 app.post("/api/add_user", async (req, res, next) => {
     const param = req.params
     const userName = param.name
-    const userDetails = param.gender
+    const userGender = param.gender
 
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
@@ -51,7 +51,7 @@ app.post("/api/add_user", async (req, res, next) => {
             res.send("Already exists.")
         } else {
             // add new user to the db.
-            await users_.add(userName, userDetails).then((data) => {
+            await users_.add(userName, userGender).then((data) => {
                 res.send(data)
             }).catch(next)
         }
