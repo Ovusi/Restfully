@@ -12,11 +12,10 @@ const users_ = new Users
  */
 app.get("/api/get_user/:", async (req, res, next) => {
     const param = req.params
-
     if (req.method === "GET") {
         if (!param) {
             // if payload  is empty, return error code.
-            res.statusCode(400)
+            res.status(400)
         } else {
             // else we query the db and return the data.
             await users_.retreive(param.name).then((data) => {
