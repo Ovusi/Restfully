@@ -36,12 +36,12 @@ app.get("/api/get_all_users", async (req, res, next) => {
 })
 
 /**
- * request body = {"name": "", "details": {}"}
+ * required request params = {"name": "", "gender": ""}
  */
 app.post("/api/add_user", async (req, res, next) => {
-    const param = req.body
+    const param = req.params
     const userName = param.name
-    const userDetails = param.details
+    const userDetails = param.gender
 
     if (req.method === "POST") {
         const keys = await users_.getAllKeys()
