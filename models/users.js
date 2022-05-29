@@ -1,3 +1,4 @@
+const { use } = require("express/lib/router")
 const level = require("level")
 
 
@@ -5,35 +6,30 @@ const level = require("level")
    It uses the LevelDb database. */
 
 
-function Users() {
+   function Users() {
     const db = level("userDb") // Create database store
 
     this.add = async (key, value) => {
         const keyString = JSON.stringify(key)
         const valueString = JSON.stringify(value)
 
-        await db.put(keyString, valueString)
-            .then((data) => { return data })
-            .catch((err) => { return err })
+        return await db.put(keyString, valueString)
+            .then(() => {return "Successfully added"})
+            .catch((err) => console.log(err))
     }
 
     this.retreive = async (key) => {
         const keyString = JSON.stringify(key)
-
-        await db.get(keyString)
-            .then((data) => { return JSON.parse(data) })
-            .catch((err) => { return err })
+        return await db.get(keyString)
     }
 
     this.getAllKeys = async () => {
         const keys = []
-        const dbIterator = db.iterator()
-        for await (let [key, value] of dbIterator) {
+        for await (const [key, value] of db.iterator()) {
             keys.push(key)
         }
         return keys
     }
 }
-
 
 module.exports = Users
