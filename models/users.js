@@ -14,8 +14,12 @@ const level = require("level")
         const valueString = JSON.stringify(value)
 
         return await db.put(keyString, valueString)
-            .then(() => {return "Successfully added"})
-            .catch((err) => console.log(err))
+            .then(() => {return {
+                "Status": "Successful",
+                "name": keyString,
+                "gender": valueString
+            }})
+            .catch((err) => {return err})
     }
 
     this.retreive = async (key) => {
