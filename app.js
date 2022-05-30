@@ -1,8 +1,8 @@
 const express = require("express")
 const { use } = require("express/lib/router")
 const Users = require("./models/users")
-const app = express()
 
+const app = express()
 app.use(express.json())
 const users_ = new Users
 
@@ -11,7 +11,7 @@ const users_ = new Users
  */
 app.get("/api/get_user", async (req, res) => {
     const param = req.body
-    
+
     await users_.retreive(param.name).then((data) => {
         res.send(data)
     }).catch((err) => console.log(err))
