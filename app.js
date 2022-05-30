@@ -11,7 +11,7 @@ const users_ = new Users
  */
 app.get("/api/get_user", async (req, res) => {
     const param = req.body
-    // else we query the db and return the data.
+    
     await users_.retreive(param.name).then((data) => {
         res.send(data)
     }).catch((err) => console.log(err))
