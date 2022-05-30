@@ -17,8 +17,8 @@ function Users() {
             .then(() => {
                 return {
                     "Status": "Successful",
-                    "name": keyString,
-                    "gender": valueString
+                    "name": JSON.parse(keyString),
+                    "gender": JSON.parse(valueString)
                 }
             })
             .catch((err) => { return err })
