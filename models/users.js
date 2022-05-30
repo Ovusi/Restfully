@@ -6,7 +6,7 @@ const level = require("level")
    It uses the LevelDb database. */
 
 
-   function Users() {
+function Users() {
     const db = level("userDb") // Create database store
 
     this.add = async (key, value) => {
