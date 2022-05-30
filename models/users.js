@@ -14,12 +14,14 @@ function Users() {
         const valueString = JSON.stringify(value)
 
         return await db.put(keyString, valueString)
-            .then(() => {return {
-                "Status": "Successful",
-                "name": keyString,
-                "gender": valueString
-            }})
-            .catch((err) => {return err})
+            .then(() => {
+                return {
+                    "Status": "Successful",
+                    "name": keyString,
+                    "gender": valueString
+                }
+            })
+            .catch((err) => { return err })
     }
 
     this.retreive = async (key) => {
