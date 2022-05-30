@@ -26,7 +26,11 @@ function Users() {
 
     this.retreive = async (key) => {
         const keyString = JSON.stringify(key)
-        return await db.get(keyString)
+        const valueString = await db.get(keyString)
+        return {
+            "name": JSON.parse(keyString),
+            "gender": JSON.parse(valueString)
+        }
     }
 
     this.getAllKeys = async () => {
