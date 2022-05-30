@@ -23,7 +23,6 @@ app.get("/api/get_all_users", async (req, res) => {
         .then((data) => {
             res.send(data)
         }).catch((err) => console.log(err))
-
 })
 
 /**
@@ -39,7 +38,6 @@ app.post("/api/add_user", async (req, res) => {
     }).catch((err) => {
         res.send(err)
     })
-
 })
 
 app.listen(3000, () => console.log("Listening on port 3000..."))
