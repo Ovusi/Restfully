@@ -10,9 +10,9 @@ const users_ = new Users
  * request body = {"name": ""}
  */
 app.get("/api/get_user", async (req, res) => {
-    const param = req.body
+    const body = req.body
 
-    await users_.retreive(param.name).then((data) => {
+    await users_.retreive(body.name).then((data) => {
         res.send(data)
     }).catch((err) => console.log(err))
 })
