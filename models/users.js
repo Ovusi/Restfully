@@ -7,9 +7,12 @@ const level = require("level")
 
 
 function Users() {
-    const db = level("userDb") // Create database store
+     // Create database store
+    const db = level("userDb")
 
+    // Add key-value to database
     this.add = async (key, value) => {
+        // levedb stores only string values
         const valueString = JSON.stringify(value)
 
         return await db.put(key, valueString)
@@ -23,6 +26,7 @@ function Users() {
             .catch((err) => { return err })
     }
 
+    // Get a specific value using a key
     this.retreive = async (key) => {
         const valueString = await db.get(key)
         return {
@@ -31,6 +35,7 @@ function Users() {
         }
     }
 
+    // Return an array of all keys in the database
     this.getAllKeys = async () => {
         const keys = []
         for await (const [key, value] of db.iterator()) {
