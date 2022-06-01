@@ -19,6 +19,12 @@ app.get("/api/get_user", async (req, res) => {
         res.send({
             "Error": "Not found"
         })
+
+    } else if (isNaN(body.id)) {
+        res.send({
+            "Error": "Id input is not a number"
+        })
+
     } else {
         // get user details from DB
         await users_.retreive(body.id).then((data) => {
