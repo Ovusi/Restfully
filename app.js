@@ -13,17 +13,17 @@ app.get("/api/get_user", async (req, res) => {
     const body = req.body
     let idlist = await users_.getAllKeys()
     let listLength = idlist.length
-    
+
     // check that user id exists
     if (body.id > listLength || body.id < 1) {
         res.send({
             "Error": "Not found"
         })
     } else {
-    // get user details from DB
-    await users_.retreive(body.id).then((data) => {
-        res.send(data)
-    }).catch((err) => console.log(err))
+        // get user details from DB
+        await users_.retreive(body.id).then((data) => {
+            res.send(data)
+        }).catch((err) => console.log(err))
     }
 })
 
@@ -49,12 +49,25 @@ app.post("/api/add_user", async (req, res) => {
     const reqBody = req.body
     const userDetails = reqBody.details
 
-    // add new user to the db.
-    await users_.add(newId, userDetails).then((data) => {
-        res.send(data)
-    }).catch((err) => {
-        res.send(err)
-    })
+    // check that request body is present or correct
+    if (!reqBody || !userDetails) {
+        res.send({
+            "Error": "Must include request body."
+        })
+
+    } else if (!userDetails.name || !userDetails.age) {
+        res.send({
+            "Error": "Add name and/or age."
+        })
+
+    } else {
+        // if checks are passed, add new user to the db.
+        await users_.add(newId, userDetails).then((data) => {
+            res.send(data)
+        }).catch((err) => {
+            res.send(err)
+        })
+    }
 })
 
 app.listen(3000, () => console.log("Listening on new port 3000..."))
