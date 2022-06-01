@@ -10,7 +10,6 @@ function Users() {
     const db = level("userDb") // Create database store
 
     this.add = async (key, value) => {
-        // const keyString = JSON.stringify(key)
         const valueString = JSON.stringify(value)
 
         return await db.put(key, valueString)
