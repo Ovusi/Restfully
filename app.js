@@ -24,9 +24,8 @@ app.get("/api/get_user", async (req, res) => {
         res.send({
             "Error": "Id input is not a number"
         })
-
-    } else {
         // get user details from DB
+    } else {
         await users_.retreive(body.id).then((data) => {
             res.send(data)
         }).catch((err) => console.log(err))
@@ -63,7 +62,9 @@ app.post("/api/add_user", async (req, res) => {
             "Error": "Must include request body."
         })
 
-    } else if (!userDetails.name || !userDetails.age || isNaN(userDetails.age)) {
+    } else if (!userDetails.name 
+        || !userDetails.age 
+        || isNaN(userDetails.age)) {
         res.send({
             "Error": "Add name and/or age. age might not be a number."
         })
@@ -78,4 +79,4 @@ app.post("/api/add_user", async (req, res) => {
     }
 })
 
-app.listen(3000, () => console.log("Listening on new port 3000..."))
+app.listen(3000, () => console.log("Listening on port 3000..."))
