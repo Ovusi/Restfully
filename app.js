@@ -7,12 +7,12 @@ app.use(express.json())
 const users_ = new Users
 
 /**
- * request body = {"name": ""}
+ * request body = {"id": ""}
  */
 app.get("/api/get_user", async (req, res) => {
     const body = req.body
 
-    await users_.retreive(body.name).then((data) => {
+    await users_.retreive(body.id).then((data) => {
         res.send(data)
     }).catch((err) => console.log(err))
 })
@@ -26,18 +26,25 @@ app.get("/api/get_all_users", async (req, res) => {
 })
 
 /**
- * required request body = {"name": "", "gender": ""}
+ * required request body = {"details": {"name": "", "age": ""}}
  */
 app.post("/api/add_user", async (req, res) => {
-    const userName = req.body.name
-    const userGender = req.body.gender
+    // return an array of the userIds
+    let idlist = await users_.getAllKeys()
+    // get the length of the array
+    let idLength = idlist.length
+    // increment the array length by 1 to get new user ids
+    let newId = idLength + 1
+
+    const reqBody = req.body
+    const userDetails = reqBody.details
 
     // add new user to the db.
-    await users_.add(userName, userGender).then((data) => {
+    await users_.add(newId, userDetails).then((data) => {
         res.send(data)
     }).catch((err) => {
         res.send(err)
     })
 })
 
-app.listen(3000, () => console.log("Listening on port 3000..."))
+app.listen(3000, () => console.log("Listening on new port 3000..."))

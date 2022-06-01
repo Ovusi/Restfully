@@ -13,11 +13,11 @@ function Users() {
         const keyString = JSON.stringify(key)
         const valueString = JSON.stringify(value)
 
-        return await db.put(keyString, valueString)
+        return await db.put(key, valueString)
             .then(() => {
                 return {
                     "Status": "Successful",
-                    "id": JSON.parse(keyString),
+                    "id": key,
                     "details": JSON.parse(valueString)
                 }
             })
@@ -28,8 +28,8 @@ function Users() {
         const keyString = JSON.stringify(key)
         const valueString = await db.get(keyString)
         return {
-            "name": JSON.parse(keyString),
-            "gender": JSON.parse(valueString)
+            "id": JSON.parse(keyString),
+            "details": JSON.parse(valueString)
         }
     }
 
