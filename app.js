@@ -11,10 +11,20 @@ const users_ = new Users
  */
 app.get("/api/get_user", async (req, res) => {
     const body = req.body
-
+    let idlist = await users_.getAllKeys()
+    let listLength = idlist.length
+    
+    // check that user id exists
+    if (body.id > listLength || body.id < 1) {
+        res.send({
+            "Error": "Not found"
+        })
+    } else {
+    // get user details from DB
     await users_.retreive(body.id).then((data) => {
         res.send(data)
     }).catch((err) => console.log(err))
+    }
 })
 
 app.get("/api/get_all_users", async (req, res) => {
