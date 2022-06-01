@@ -7,7 +7,7 @@ const level = require("level")
 
 
 function Users() {
-     // Create database store
+    // Create database store
     const db = level("userDb")
 
     // Add key-value to database
