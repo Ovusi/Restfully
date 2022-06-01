@@ -7,7 +7,7 @@ app.use(express.json())
 const users_ = new Users
 
 /**
- * request body = {"id": ""}
+ * request body = {"id": number}
  */
 app.get("/api/get_user", async (req, res) => {
     const body = req.body
@@ -26,7 +26,7 @@ app.get("/api/get_all_users", async (req, res) => {
 })
 
 /**
- * required request body = {"details": {"name": "", "age": ""}}
+ * required request body = {"details": {"name": "", "age": number}}
  */
 app.post("/api/add_user", async (req, res) => {
     // return an array of the userIds
