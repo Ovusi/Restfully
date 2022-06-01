@@ -47,7 +47,7 @@ app.post("/api/add_user", async (req, res) => {
     let idLength = idlist.length
     // increment the array length by 1 to get new user ids
     let newId = idLength + 1
-
+    // get request body
     const reqBody = req.body
     const userDetails = reqBody.details
 
