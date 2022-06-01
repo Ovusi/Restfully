@@ -19,7 +19,7 @@ app.get("/api/get_user", async (req, res) => {
         res.send({
             "Error": "Not found"
         })
-
+    // check if body.id is a number
     } else if (isNaN(body.id)) {
         res.send({
             "Error": "Id input is not a number"
