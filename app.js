@@ -19,7 +19,7 @@ app.get("/api/get_user", async (req, res) => {
         res.send({
             "Error": "Not found"
         })
-    // check if body.id is a number
+        // check if body.id is a number
     } else if (isNaN(body.id)) {
         res.send({
             "Error": "Id input is not a number"
@@ -63,9 +63,9 @@ app.post("/api/add_user", async (req, res) => {
             "Error": "Must include request body."
         })
 
-    } else if (!userDetails.name || !userDetails.age) {
+    } else if (!userDetails.name || !userDetails.age || isNaN(userDetails.age)) {
         res.send({
-            "Error": "Add name and/or age."
+            "Error": "Add name and/or age. age might not be a number."
         })
 
     } else {
