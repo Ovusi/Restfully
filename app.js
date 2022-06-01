@@ -32,7 +32,7 @@ app.get("/api/get_all_users", async (req, res) => {
     await users_.getAllKeys()
         .then((data) => {
             res.send(data)
-        }).catch((err) => console.log(err))
+        }).catch((err) => res.send(err))
 })
 
 /**

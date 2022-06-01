@@ -10,7 +10,7 @@ function Users() {
     const db = level("userDb") // Create database store
 
     this.add = async (key, value) => {
-        const keyString = JSON.stringify(key)
+        // const keyString = JSON.stringify(key)
         const valueString = JSON.stringify(value)
 
         return await db.put(key, valueString)
@@ -25,10 +25,9 @@ function Users() {
     }
 
     this.retreive = async (key) => {
-        const keyString = JSON.stringify(key)
-        const valueString = await db.get(keyString)
+        const valueString = await db.get(key)
         return {
-            "id": JSON.parse(keyString),
+            "id": key,
             "details": JSON.parse(valueString)
         }
     }
