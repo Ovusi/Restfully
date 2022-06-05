@@ -30,7 +30,7 @@ function Users() {
     this.retreive = async (key) => {
         const valueString = await db.get(key)
         return {
-            "id": key,
+            "id": Number(key),
             "details": JSON.parse(valueString)
         }
     }
