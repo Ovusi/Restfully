@@ -9,9 +9,9 @@ const users_ = new Users
 /**
  * request param - id = number
  */
-app.get("/api/get_user", async (req, res) => {
+app.get("/api/get_user/:id", async (req, res) => {
     // get request "id" parameter
-    const _id = req.query['id']
+    const _id = req.params.id
     // get list of all database IDs
     let idlist = await users_.getAllKeys()
     let listLength = idlist.length
