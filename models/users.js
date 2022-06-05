@@ -18,8 +18,8 @@ function Users() {
         return await db.put(key, valueString)
             .then(() => {
                 return {
-                    "Status": "Successful",
-                    "id": key,
+                    "status": "Successful",
+                    "user id": key,
                     "details": JSON.parse(valueString)
                 }
             })
@@ -30,7 +30,7 @@ function Users() {
     this.retreive = async (key) => {
         const valueString = await db.get(key)
         return {
-            "id": Number(key),
+            "user id": key,
             "details": JSON.parse(valueString)
         }
     }
@@ -39,7 +39,7 @@ function Users() {
     this.getAllKeys = async () => {
         const keys = []
         for await (const [key, value] of db.iterator()) {
-            keys.push(Number(key))
+            keys.push(key)
         }
         return keys
     }
