@@ -7,26 +7,28 @@ app.use(express.json())
 const users_ = new Users
 
 /**
- * request body = {"id": number}
+ * request param - id = number
  */
 app.get("/api/get_user", async (req, res) => {
-    const body = req.body
+    // get request "id" parameter
+    const _id = req.query['id']
+    // get list of all database IDs
     let idlist = await users_.getAllKeys()
     let listLength = idlist.length
 
     // check that user id exists
-    if (body.id > listLength || body.id < 1) {
+    if (_id > listLength || _id < 1) {
         res.send({
             "Error": "Not found"
         })
         // check if body.id is a number
-    } else if (isNaN(body.id)) {
+    } else if (isNaN(_id)) {
         res.send({
             "Error": "Id input is not a number"
         })
         // get user details from DB
     } else {
-        await users_.retreive(body.id).then((data) => {
+        await users_.retreive(_id).then((data) => {
             res.send(data)
         }).catch((err) => console.log(err))
     }
