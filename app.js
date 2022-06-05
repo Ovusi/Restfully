@@ -54,7 +54,7 @@ app.post("/api/add_user/:user", async (req, res) => {
     const userDetails = reqBody.details
     const newUser = req.params.user
 
-
+    // if user name oesnt exist...
     if (!idlist.includes(newUser)) {
         // check that request body is present or correct
         if (!reqBody || !userDetails) {
@@ -78,6 +78,7 @@ app.post("/api/add_user/:user", async (req, res) => {
             })
         }
     } else {
+          // if user name exists...
         res.send({
             "Error": "already exists"
         })
