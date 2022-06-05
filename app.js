@@ -14,8 +14,6 @@ app.get("/api/get_user/:userid", async (req, res) => {
     const _id = req.params.userid
     // get list of all database user IDs
     let idlist = await users_.getAllKeys()
-    let listLength = idlist.length
-
     // check that user id exists
     if (!idlist.includes(_id)) {
         res.send({
