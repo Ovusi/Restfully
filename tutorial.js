@@ -32,15 +32,19 @@ const insert = (request, response) => {
         if (err) throw err
         const dbo = db.db("mydb")
 
-        const myobj = { name: request.body.username, address: request.body.useradd, mobile: request.body.mobile };
+        const myobj = {
+            name: request.body.username,
+            address: request.body.useradd,
+            mobile: request.body.mobile
+        }
 
-        dbo.collection("users").insertOne(myobj, function(err, res) {
+        dbo.collection("users").insertOne(myobj, function (err, res) {
             if (err) throw err;
             console.log("1 document inserted");
             db.close();
             response.send(res)
-        });
-    });
+        })
+    })
 }
 
 module.exports = { findAll, insert }
