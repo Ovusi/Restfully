@@ -19,7 +19,7 @@ function Users() {
             .then(() => {
                 return {
                     "status": "Successful",
-                    "user id": key,
+                    "userid": key,
                     "details": JSON.parse(valueString)
                 }
             })

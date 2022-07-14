@@ -1,6 +1,7 @@
 const express = require("express")
 const { use } = require("express/lib/router")
 const Users = require("./models/users")
+const { insert, findAll } = require("./tutorial")
 
 const app = express()
 app.use(express.json())
@@ -83,5 +84,8 @@ app.post("/api/add_user/:user", async (req, res) => {
     }
 
 })
+
+app.post("/instertcoll", insert)
+app.get("/searchall", findAll)
 
 app.listen(3000, () => console.log("Listening on port 3000..."))
